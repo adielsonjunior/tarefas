@@ -13,7 +13,6 @@ if(mysqli_connect_errno($conexao)){
 }
 
 
-
 function buscar_tarefas($conexao){
   $sqlBusca = "SELECT * FROM tarefas";
   
@@ -32,16 +31,9 @@ function buscar_tarefas($conexao){
 //Tem  uma aspa simples que contatena com o $id
 function buscar_tarefa($conexao,$id){
   $sqlBusca =  'SELECT * FROM tarefas WHERE id= '.$id;
-  
   $resultado = mysqli_query($conexao,$sqlBusca);
   return mysqli_fetch_assoc($resultado);
 }
-
-
-
-
-
-
 
 
 
@@ -50,9 +42,9 @@ function gravar_tarefa($conexao,$tarefa){
 	VALUES(
           '{$tarefa['nome']}',
           '{$tarefa['descricao']}',
-		  {$tarefa['prioridade']},
+           {$tarefa['prioridade']},
           '{$tarefa['prazo']}',
-		  {$tarefa['concluida']}
+           {$tarefa['concluida']}
             
             )";
 
@@ -62,16 +54,21 @@ function gravar_tarefa($conexao,$tarefa){
 
 
 
-
-function editar_tarefa($conexao,$id){
+function editar_tarefa($conexao,$tarefa){
   
-  $sql = "UPDATE tarefas SET 
+  $sqlEditar = "UPDATE tarefas SET 
             nome='{$tarefa['nome']}',
             descricao={$tarefa['descricao']},
             prioridade={$tarefa['prioridade']},
             prazo={$tarefa['prazo']},
-            concluida={$tarefa['concluido']} 
-          WHERE id={$tarefa['id']}
+            concluida={$tarefa['concluida']} 
+          WHERE id= {$tarefa['id']}
           ";
-  mysql_query($conexao,$sqlEditar);
+  mysqli_query($conexao,$sqlEditar);
+}
+
+function remover_tarefa($conexao,$id){
+    $sqlRemover = "DELETE FROM tarefas WHERE id={$id}";
+    mysqli_query($conexao, $sqlRemover);
+    
 }

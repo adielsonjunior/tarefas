@@ -49,3 +49,9 @@ function traduz_data_para_exibir($data){
 	return $data_exibir;
 }
 
+function tem_post(){
+    if(count($_POST)>0){
+    return true;
+}
+return false;
+}

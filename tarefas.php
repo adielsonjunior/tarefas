@@ -5,33 +5,46 @@
 	include("banco.php");
 	include("ajudantes.php");
 	$exibir_tabela = true;
+        $tem_erros = false;
+        $erros_validacao =array();
+        
+        
 	
-if (isset($_GET['nome']) && $_GET['nome'] != '') {
+if (tem_post()) {
 	$tarefa = array();
-		$tarefa['nome'] = $_GET['nome'];
+                if(isset($_POST['nome']) && strlen($_POST['nome']> 0)){
+                    $tarefa['nome'] = $_POST['nome'];
+                 }else{
+                     $tem_erros = true;
+                     $erros_validacao['nome'] = 'O nome da Tarefa é obrigatório';
+                     
+                 }
+                
 		if (isset($_GET['descricao'])) {
 			$tarefa['descricao'] = $_GET['descricao'];
 			} else {
 			$tarefa['descricao'] = '';
 			}
-		if (isset($_GET['prazo'])) {
-			$tarefa['prazo'] = traduz_data_para_banco($_GET['prazo']);
+		if (isset($_POST['prazo'])) {
+			$tarefa['prazo'] = traduz_data_para_banco($_POST['prazo']);
 			} else {
 			$tarefa['prazo'] = '';
 			}
-		$tarefa['prioridade'] = $_GET['prioridade'];	
-			if (isset($_GET['concluida'])) {
+		$tarefa['prioridade'] = $_POST['prioridade'];	
+			if (isset($_POST['concluida'])) {
 			$tarefa['concluida'] = 1;
 			} else {
 			$tarefa['concluida'] = 0;
 			}
-		
+                        
+		if(!$tem_erros){
 		 gravar_tarefa($conexao, $tarefa);
-        header('Location: tarefas.php');
-        die();
+                    header('Location: tarefas.php');
+                    die();
+                    
 		}
-
-      
+    
+}      
       $lista_tarefas = buscar_tarefas($conexao);		
 
 // ESTA AQUI PQ A VARIAVEL $lista_tarefas é criada no php primeiro.
@@ -45,5 +58,3 @@ if (isset($_GET['nome']) && $_GET['nome'] != '') {
     'concluida'=> ''
     );
   include "template.php";
-
-
