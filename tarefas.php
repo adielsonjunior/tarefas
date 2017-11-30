@@ -4,7 +4,7 @@
 
 	include("banco.php");
 	include("ajudantes.php");
-	$exibir_tabela = false;
+	$exibir_tabela = true;
 	
 if (isset($_GET['nome']) && $_GET['nome'] != '') {
 	$tarefa = array();
@@ -26,12 +26,24 @@ if (isset($_GET['nome']) && $_GET['nome'] != '') {
 			$tarefa['concluida'] = 0;
 			}
 		
-		gravar_tarefa($conexao, $tarefa);
+		 gravar_tarefa($conexao, $tarefa);
+        header('Location: tarefas.php');
+        die();
 		}
 
+      
+      $lista_tarefas = buscar_tarefas($conexao);		
 
-$lista_tarefas = buscar_tarefas($conexao);		
-		
 // ESTA AQUI PQ A VARIAVEL $lista_tarefas é criada no php primeiro.
-include "template.php";
+
+  $tarefa =  array(
+    'id' => 0,
+    'nome' =>'',
+    'descricao'=>'',
+    'prazo'=>'',
+    'prioridade' =>1,
+    'concluida'=> ''
+    );
+  include "template.php";
+
 

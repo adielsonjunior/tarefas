@@ -10,8 +10,7 @@
 
 	<?php if($exibir_tabela):?>
 		<?php include('tabela.php');?>
-	
-	<?php endif;?>
+		<?php endif;?>
 </body>
 </html>
 
