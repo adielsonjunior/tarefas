@@ -1,8 +1,7 @@
 <?php
 
 
-function traduz_concluida($concluida)
-{
+function traduz_concluida($concluida){
     if ($concluida == 1) {
         return 'Sim';
     }
@@ -33,6 +32,12 @@ function traduz_data_para_banco($data)
         return "";
     }
     $dados = explode("/",$data);
+	
+	if(count($dados) != 3){
+		return $data;
+	}
+		
+	
     $data_mysql = "{$dados[2]}-{$dados[1]}-{$dados[0]}";
     return $data_mysql;
 }
@@ -43,6 +48,10 @@ function traduz_data_para_exibir($data){
 		return "";
 	}
 	$dados = explode("-",$data);
+	
+	if(count($dados) !=3){
+		return $data;
+	}
 	
 	$data_exibir = "{$dados[2]}/{$dados[1]}/{$dados[0]}";
 	
@@ -55,3 +64,11 @@ function tem_post(){
 }
 return false;
 }
+
+function validar_data($data){
+    $padrao = '/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/';
+    $resultado = preg_match($padrao, $data);
+    
+    return $resultado;
+}
+

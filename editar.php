@@ -2,7 +2,9 @@
 session_start();
 include "banco.php";
 include "ajudantes.php";
+
 $exibir_tabela = false;
+
 if (isset($_POST['nome']) && $_POST['nome'] != '') {
     $tarefa = array();
     $tarefa['id'] = $_POST['id'];
@@ -29,7 +31,7 @@ if (isset($_POST['nome']) && $_POST['nome'] != '') {
     header('Location: tarefas.php');
     die();
 }
-$tarefa = buscar_tarefa($conexao, $_POST['id']);
-include "template.php";
+    $tarefa = buscar_tarefa($conexao, $_POST['id']);
+    include "template.php";
 
 ?>
