@@ -1,4 +1,4 @@
-<?php error_reporting (E_ALL ^ E_NOTICE)?>
+<?php error_reporting (E_ALL)?>
 <?php 
   //LISTA AS TAREFAS E CADASTRA O ARQUIVO
   

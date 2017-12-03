@@ -74,7 +74,7 @@ function validar_data($data){
 
 
 function tratar_anexo($anexo){
-  $padrao = '/^.+(\.pdf|\.zip)$/';
+  $padrao = '/^.+(\.pdf$|\.txt$)$/';
   $resultado = preg_match($padrao, $anexo['name']);
   
   if(!$resultado){

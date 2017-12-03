@@ -56,11 +56,12 @@ function gravar_tarefa($conexao,$tarefa){
 
 function editar_tarefa($conexao,$tarefa){
   
-  $sqlEditar = "UPDATE tarefas SET 
+  $sqlEditar = "
+  UPDATE tarefas SET 
             nome='{$tarefa['nome']}',
-            descricao={$tarefa['descricao']},
+            descricao='{$tarefa['descricao']}',
             prioridade={$tarefa['prioridade']},
-            prazo={$tarefa['prazo']},
+            prazo='{$tarefa['prazo']}',
             concluida={$tarefa['concluida']} 
           WHERE id= {$tarefa['id']}
           ";
@@ -74,9 +75,9 @@ function remover_tarefa($conexao,$id){
 }
 
 function gravar_anexo($conexao,$anexo){
-  $sqlGravar = "INSERT into anexos(tarefa_id,nome,arquivo) 
+  $sqlGravar = "INSERT into anexos (tarefa_id,nome,arquivo) 
                 VALUES({$anexo['tarefa_id']},
-                        '{$anexo[nome]}',
+                        '{$anexo['nome']}',
                         '{$anexo['arquivo']}'
                         
                         )";

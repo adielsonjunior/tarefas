@@ -4,13 +4,13 @@ include "banco.php";
 include "ajudantes.php";
 
 $tem_erros = false;
-$erros_validacao = array();
+$erros_validacao = array ();
 
 if(tem_post()){
   //upload   
   $tarefa_id = $_POST['tarefa_id'];
   
-  if(! isset($_FILES['anexo'])){
+  if(!isset($_FILES['anexo'])){
     $tem_erros = true;
     $erros_validacao['anexo'] = 'Você deve selecionar um arquivo para anexar';
   }else{
@@ -23,9 +23,10 @@ if(tem_post()){
       $tem_erros = true;
       $erros_validacao['anexo'] = 'Envie apenas anexos nos formatos txt ou pdf';
     }
-   
+    
+    
   }
-  if(! $tem_erros){
+  if(!$tem_erros){
     gravar_anexo($conexao,$anexo);
   }
   
@@ -36,3 +37,4 @@ $anexos = buscar_anexos($conexao, $_GET['id']);
 
 include "template_tarefa.php";
 
+?>
