@@ -1,10 +1,12 @@
 <?php error_reporting (E_ALL ^ E_NOTICE)?>
 <?php 
+  //LISTA AS TAREFAS E CADASTRA O ARQUIVO
+  
 	session_start();
 
 	include("banco.php");
 	include("ajudantes.php");
-	$exibir_tabela = true;
+	   $exibir_tabela = true;
         $tem_erros = false;
         $erros_validacao =array();
         
@@ -12,7 +14,8 @@
 	
 if (tem_post()) {
 	$tarefa = array();
-                if(isset($_POST['nome']) && strlen($_POST['nome']> 0)){
+  
+                if(isset($_POST['nome']) && strlen($_POST['nome'])> 0){
                     $tarefa['nome'] = $_POST['nome'];
                  }else{
                      $tem_erros = true;
